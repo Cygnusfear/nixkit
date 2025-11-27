@@ -4,6 +4,8 @@ Minimal CLI toolkit for a humane shell experience. Import into any Nix project t
 
 ## What's Included
 
+### Tools
+
 | Tool | Replaces | Description |
 |------|----------|-------------|
 | [ripgrep](https://github.com/BurntSushi/ripgrep) | grep | Fast regex search |
@@ -15,14 +17,34 @@ Minimal CLI toolkit for a humane shell experience. Import into any Nix project t
 | [starship](https://starship.rs) | PS1 | Cross-shell prompt |
 | [jq](https://jqlang.github.io/jq/) | - | JSON processor |
 
-## Shell Setup
+### Shell Setup
 
-When you enter the shell, nixkit automatically:
-- Initializes starship prompt
-- Sets up zoxide for smart `cd`
-- Configures fzf keybindings (Ctrl+R for history, Ctrl+T for files)
-- Sets bat as your pager (including man pages)
-- Aliases: `ls`→eza, `ll`→eza -la, `tree`→eza --tree, `cat`→bat
+When you enter the shell, nixkit automatically configures:
+
+**Environment:**
+- Starship prompt with clean config (noisy cloud modules disabled)
+- bat as pager (including for man pages)
+- fzf with fd for file finding
+- UTF-8 locale
+
+**Zsh options:**
+- Smart history (dedup, shared, verify before execute)
+- Auto-cd and directory stack
+- Case-insensitive completion
+- ALT+arrow word navigation
+
+**Aliases:**
+- `ls`, `ll`, `la`, `tree` → eza
+- `cat` → bat
+- `preview` → fzf with bat preview
+- `add`, `push`, `pull`, `fetch` → git shortcuts
+
+**Functions:**
+- `man` → Enhanced man pages with bat
+- `run` → Smart package runner (detects yarn/npm/pnpm/bun)
+- `cleandev` → Kill dev servers on common ports
+- `commit` → Git commit with type prefix (`commit fix "message"`)
+- `gits` → Interactive git status with fzf
 
 ## Usage
 
@@ -66,7 +88,7 @@ devShells.default = pkgs.mkShell {
     nixkit.packages.${system}.default  # just the CLI tools
     pkgs.nodejs_22
   ];
-  # Use your own shellHook, or:
+  # Optionally add the shell setup:
   shellHook = nixkit.lib.shellHook;
 };
 ```
@@ -75,9 +97,10 @@ devShells.default = pkgs.mkShell {
 
 | Output | Description |
 |--------|-------------|
-| `devShells.${system}.default` | Full shell with tools + initialization |
-| `packages.${system}.default` | Just the CLI tools bundled together |
-| `lib.shellHook` | Just the shell initialization script |
+| `devShells.${system}.default` | Full shell with tools + config |
+| `packages.${system}.default` | Just the CLI tools bundled |
+| `packages.${system}.starshipConfig` | Path to starship.toml in nix store |
+| `lib.shellHook` | Shell initialization script |
 
 ## License
 
