@@ -29,7 +29,7 @@ When you enter the shell, nixkit automatically:
 ### Use Directly
 
 ```bash
-nix develop github:yourusername/nixkit
+nix develop github:Cygnusfear/nixkit
 ```
 
 ### Import in Your Project
@@ -39,7 +39,7 @@ nix develop github:yourusername/nixkit
 {
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    nixkit.url = "github:yourusername/nixkit";
+    nixkit.url = "github:Cygnusfear/nixkit";
   };
 
   outputs = { self, nixpkgs, nixkit, ... }:
