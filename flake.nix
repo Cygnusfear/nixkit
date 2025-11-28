@@ -99,11 +99,19 @@
             eval "$(zoxide init bash)"
           fi
 
-          # fzf keybindings
+          # fzf keybindings (--zsh/--bash requires fzf 0.48+)
           if [[ -n "$ZSH_VERSION" ]]; then
-            eval "$(fzf --zsh 2>/dev/null || true)"
+            if fzf --zsh &>/dev/null; then
+              eval "$(fzf --zsh)"
+            elif [[ -f "${FZF_BASE:-/usr/share/fzf}/key-bindings.zsh" ]]; then
+              source "${FZF_BASE:-/usr/share/fzf}/key-bindings.zsh"
+            fi
           elif [[ -n "$BASH_VERSION" ]]; then
-            eval "$(fzf --bash 2>/dev/null || true)"
+            if fzf --bash &>/dev/null; then
+              eval "$(fzf --bash)"
+            elif [[ -f "${FZF_BASE:-/usr/share/fzf}/key-bindings.bash" ]]; then
+              source "${FZF_BASE:-/usr/share/fzf}/key-bindings.bash"
+            fi
           fi
 
           # ============================================
@@ -212,11 +220,19 @@
         if [[ -n "$ZSH_VERSION" ]]; then
           eval "$(starship init zsh)"
           eval "$(zoxide init zsh)"
-          eval "$(fzf --zsh 2>/dev/null || true)"
+          if fzf --zsh &>/dev/null; then
+            eval "$(fzf --zsh)"
+          elif [[ -f "${FZF_BASE:-/usr/share/fzf}/key-bindings.zsh" ]]; then
+            source "${FZF_BASE:-/usr/share/fzf}/key-bindings.zsh"
+          fi
         elif [[ -n "$BASH_VERSION" ]]; then
           eval "$(starship init bash)"
           eval "$(zoxide init bash)"
-          eval "$(fzf --bash 2>/dev/null || true)"
+          if fzf --bash &>/dev/null; then
+            eval "$(fzf --bash)"
+          elif [[ -f "${FZF_BASE:-/usr/share/fzf}/key-bindings.bash" ]]; then
+            source "${FZF_BASE:-/usr/share/fzf}/key-bindings.bash"
+          fi
         fi
 
         # Aliases
