@@ -103,14 +103,14 @@
           if [[ -n "$ZSH_VERSION" ]]; then
             if fzf --zsh &>/dev/null; then
               eval "$(fzf --zsh)"
-            elif [[ -f "${FZF_BASE:-/usr/share/fzf}/key-bindings.zsh" ]]; then
-              source "${FZF_BASE:-/usr/share/fzf}/key-bindings.zsh"
+            elif [[ -f "''${FZF_BASE:-/usr/share/fzf}/key-bindings.zsh" ]]; then
+              source "''${FZF_BASE:-/usr/share/fzf}/key-bindings.zsh"
             fi
           elif [[ -n "$BASH_VERSION" ]]; then
             if fzf --bash &>/dev/null; then
               eval "$(fzf --bash)"
-            elif [[ -f "${FZF_BASE:-/usr/share/fzf}/key-bindings.bash" ]]; then
-              source "${FZF_BASE:-/usr/share/fzf}/key-bindings.bash"
+            elif [[ -f "''${FZF_BASE:-/usr/share/fzf}/key-bindings.bash" ]]; then
+              source "''${FZF_BASE:-/usr/share/fzf}/key-bindings.bash"
             fi
           fi
 
@@ -222,16 +222,16 @@
           eval "$(zoxide init zsh)"
           if fzf --zsh &>/dev/null; then
             eval "$(fzf --zsh)"
-          elif [[ -f "${FZF_BASE:-/usr/share/fzf}/key-bindings.zsh" ]]; then
-            source "${FZF_BASE:-/usr/share/fzf}/key-bindings.zsh"
+          elif [[ -f "''${FZF_BASE:-/usr/share/fzf}/key-bindings.zsh" ]]; then
+            source "''${FZF_BASE:-/usr/share/fzf}/key-bindings.zsh"
           fi
         elif [[ -n "$BASH_VERSION" ]]; then
           eval "$(starship init bash)"
           eval "$(zoxide init bash)"
           if fzf --bash &>/dev/null; then
             eval "$(fzf --bash)"
-          elif [[ -f "${FZF_BASE:-/usr/share/fzf}/key-bindings.bash" ]]; then
-            source "${FZF_BASE:-/usr/share/fzf}/key-bindings.bash"
+          elif [[ -f "''${FZF_BASE:-/usr/share/fzf}/key-bindings.bash" ]]; then
+            source "''${FZF_BASE:-/usr/share/fzf}/key-bindings.bash"
           fi
         fi
 
